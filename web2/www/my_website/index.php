@@ -14,17 +14,17 @@
 <html>
 <head>
     <title>My website</title>
-    <link rel="stylesheet" href="my_website/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div class="sidebar">
         <h2>Contact me</h2>
         <ul>
-            <li> <a href = "https://www.gmail.com"> <img src="/my_website/logo.png" alt = "logo"> Email </a> </li>
-            <li> <a href = "https://www.linkedin.com"> <img src = "/my_website/logo.png" alt = "logo"> Linkedin </a> </li>
-            <li> <a href = "https://www.github.com"> <img src = "/my_website/logo.png" alt = "logo"> Github </a> </li>
-            <li> <a href = "https://www.facebook.com"> <img src = "/my_website/logo.png" alt = "logo"> Facebook </a> </li>
+            <li> <a href = "https://www.gmail.com"> <img src="logos/email.png" alt = "logo"> <span>Email</span> </a> </li>
+            <li> <a href = "https://www.linkedin.com"> <img src = "logos/linkedin.png" alt = "logo"> <span>Linkedin</span> </a> </li>
+            <li> <a href = "https://www.github.com"> <img src = "logos/github.png" alt = "logo"> <span>Github</span> </a> </li>
+            <li> <a href = "https://www.facebook.com"> <img src = "logos/facebook.png" alt = "logo"> <span>Facebook</span> </a> </li>
         </ul>
     </div>
 

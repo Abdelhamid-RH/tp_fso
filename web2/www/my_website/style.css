@@ -1,50 +1,69 @@
 body{
     margin: 0;
-    background: linear-gradient(135deg, #111827 0%, #4b5563 100%);
-    color: aliceblue;
+    background: #fbf8f1;
+    color: black;
 }
 
 .sidebar{
     position: fixed;
     top: 0;
     left: 0;
-    width: 15%;
+    width: 14%;
     height: 100vh;
-    background-color: black;
+    background-color: #e99433;
+    
 }
 
 .main{
     margin-left: 17%;
-    min-height: 200vh;
+    min-height: 200vh;  
 }
 
 h1{
+    padding-top: 5%;
     font-family: 'Courier New', Courier, monospace;
     text-align: center;
+    color: black;
+    font-size: 48px;
+    font-weight: 800;
 }
-
+/*color: rgb(188, 53, 53);*/
 table{
     font-size: 29px;
-    
-    margin: 0 auto 0 5%;
+    background-color: white;
+    margin: auto auto;
     margin-top: 3%;
-    background-color: inear-gradient(135deg, #424752 0%, #6d7784 10%);
-    color: #94a3b8;
+    color: black;
     font-family: system-ui, -apple-system, sans-serif;
-    border-radius: 10px;
-    width: 40%;
+    border-radius: 12px;
+    width: 60%;
     height: 250px;
-    font-weight: 500;
+    font-weight: 300;
+    box-shadow: 0 4px 20px rgb(0, 0, 0, 0.5);
+}
+
+.sidebar a:hover{
+    color: white;
+}
+
+td{
+    padding: 3% 5% 1% 3%;
+    margin: auto auto;
+    border-bottom: 1px solid gray;
 }
 
 h2{
+    margin-top: 40px;
+    margin-bottom: 40px;
     text-align: center;
+    color: black;
+    font-size: 32px;
 }
 
 ul{
-    font-size: 22px;
+    font-size: 28px;
     list-style: none;
-    padding: 0;
+    padding: auto auto 3% auto;
     margin: 0;
 }
 
@@ -54,6 +73,15 @@ li{
 
 }
 
+span{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+img{
+    vertical-align: middle;
+    
+}
+
 img{
     width: 15%;
 }
@@ -61,30 +89,32 @@ img{
 a{
     text-decoration: none;
     color: inherit;
+
 }
 
 h3{
     font-family: system-ui, -apple-system, sans-serif;
     font-size: 28px;
-    margin-top: 10%;
+    margin-top: 4%;
     text-align: center;
-    color:  black;
-    font-weight: 600;
+    color:  #d97706;;
+    font-weight: 500;
     
 }
 
 .about{
-    font-size: 22px;
+    font-size: 28px;
     font-family: 'Times New Roman', Times, serif;
     margin: auto 10%;
     line-height: 1.8;
 }
 
 .answer{
-    color: white;
+    color: black;
+    font-weight: 600;
 }
 
 .welcom{
-    margin: 5% auto 0px;
+    margin: 1px auto 0px;
     
 }

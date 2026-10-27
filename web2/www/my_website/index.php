@@ -29,8 +29,8 @@
     </div>
 
     <div class="main">
-        <h1>My First Php Page</h1>
-        <h3 class ="welcom"> Welcom To My Page</h3>
+        <h1>My First PHP Page</h1>
+        <h3 class ="welcom"> Welcome To My Page</h3>
         <table>
             <tr>
                 <td>First name:</td>

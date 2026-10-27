@@ -1,0 +1,90 @@
+body{
+    margin: 0;
+    background: linear-gradient(135deg, #111827 0%, #4b5563 100%);
+    color: aliceblue;
+}
+
+.sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 15%;
+    height: 100vh;
+    background-color: black;
+}
+
+.main{
+    margin-left: 17%;
+    min-height: 200vh;
+}
+
+h1{
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+}
+
+table{
+    font-size: 29px;
+    
+    margin: 0 auto 0 5%;
+    margin-top: 3%;
+    background-color: inear-gradient(135deg, #424752 0%, #6d7784 10%);
+    color: #94a3b8;
+    font-family: system-ui, -apple-system, sans-serif;
+    border-radius: 10px;
+    width: 40%;
+    height: 250px;
+    font-weight: 500;
+}
+
+h2{
+    text-align: center;
+}
+
+ul{
+    font-size: 22px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li{
+    margin: 5% auto;
+    padding: 0 0 10% 0;
+
+}
+
+img{
+    width: 15%;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+h3{
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 28px;
+    margin-top: 10%;
+    text-align: center;
+    color:  black;
+    font-weight: 600;
+    
+}
+
+.about{
+    font-size: 22px;
+    font-family: 'Times New Roman', Times, serif;
+    margin: auto 10%;
+    line-height: 1.8;
+}
+
+.answer{
+    color: white;
+}
+
+.welcom{
+    margin: 5% auto 0px;
+    
+}

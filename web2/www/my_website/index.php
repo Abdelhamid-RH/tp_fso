@@ -3,59 +3,45 @@
     $first_name = "Abdelhamid";
     $last_name = "RH";
     $program = "Computer science";
-    $y = 2026;
-    $date = date("d-m-y")
+    $year = 2026;
+    $date = date("d-m-Y  H:i");
 
+    $student = ["First name:" => $first_name, "Last name:" => $last_name, "Program:" => $program, "Year:" => $year, "Date and time:" => $date];
 ?>
-
 
 
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>My website</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div class="sidebar">
-        <h2>Contact me</h2>
+        <h2 class="contact">Contact me</h2>
         <ul>
-            <li> <a href = "https://www.gmail.com"> <img src="logos/email.png" alt = "logo"> <span>Email</span> </a> </li>
-            <li> <a href = "https://www.linkedin.com"> <img src = "logos/linkedin.png" alt = "logo"> <span>Linkedin</span> </a> </li>
-            <li> <a href = "https://www.github.com"> <img src = "logos/github.png" alt = "logo"> <span>Github</span> </a> </li>
-            <li> <a href = "https://www.facebook.com"> <img src = "logos/facebook.png" alt = "logo"> <span>Facebook</span> </a> </li>
+            <li> <a href = "https://www.gmail.com"> <img src="logos/email.png" alt = "logo">          Email   </a> </li>
+            <li> <a href = "https://www.linkedin.com"> <img src = "logos/linkedin.png" alt = "logo">  Linkedin  </a> </li>
+            <li> <a href = "https://www.github.com"> <img src = "logos/github.png" alt = "logo">      Github    </a> </li>
+            <li> <a href = "https://www.facebook.com"> <img src = "logos/facebook.png" alt = "logo">  Facebook  </a> </li>
         </ul>
     </div>
 
     <div class="main">
-        <h1>My First PHP Page</h1>
+        <h1 class="title">My First PHP Page</h1>
         <h3 class ="welcom"> Welcome To My Page</h3>
         <table>
-            <tr>
-                <td>First name:</td>
-                <td class="answer"> <?php echo $first_name ?> </td>
-            </tr>
+            <?php foreach ($student as $key => $value): ?>
 
-            <tr>
-                <td>Last name:</td>
-                <td class="answer"><?= $last_name ?></td>
-            </tr>
+                <tr>
+                    <td> <?= $key ?> </td>
+                    <td class="answer"> <?= $value ?> </td>
+                </tr>
 
-            <tr>
-                <td>Program:</td>
-                <td class="answer"><?= $program?></td>
-            </tr>
-
-            <tr>
-                <td>Year:</td>
-                <td class="answer"><?= date("Y")?></td>
-            </tr>
-
-            <tr>
-                <td>Date and time</td>
-                <td class="answer"> <?= date("d-m-Y  h:i") ?> </td>
-            </tr>
+            <?php endforeach ?>
+            
         </table>
         <h3>About me</h3>
         <p class="about">
@@ -65,5 +51,4 @@
             </p>
     </div>
 </body>
-
 </html>

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//EX!
+//EX1
 
 typedef struct Livre Livre;
 struct Livre
@@ -14,7 +14,7 @@ struct Livre
 };
 
 typedef struct Cellule Cellule;
-struct Cellule
+struct Cellule 
 {
     Livre info;
     Cellule* prec;
@@ -40,7 +40,7 @@ Cellule* creerCellule(Livre* liv1)
 
 
 Livre* creerLivre(int id1 , char* titre1, char* auteur1, int annee1, int nombre_exemplaire1)
-{
+{                                                                                   
     Livre* liv1 = malloc(sizeof(Livre));
     if (liv1 == NULL) exit(EXIT_FAILURE);
 
@@ -53,9 +53,9 @@ Livre* creerLivre(int id1 , char* titre1, char* auteur1, int annee1, int nombre_
 
     return liv1;
 }
+
+
 //EX2
-
-
 void insererDebut(Liste* lis1, Livre* liv1)
 {
     Cellule* cel1 = creerCellule(liv1);
@@ -93,7 +93,6 @@ void insererFin(Liste* lis1, Livre* liv1)
 
     cel1->prec = ptr;
     ptr->suiv = cel1;
-
 }
 
 
@@ -101,34 +100,38 @@ void insererApres(Liste* lis1, Livre* liv1, int id1)
 {
     Cellule* cel1 = creerCellule(liv1);
 
-    if (lis1->tete == NULL)
+    if (lis1->tete == NULL) // if the list is empty
     {
-        cel1->prec = NULL;
-        cel1->suiv = NULL;
-        lis1->tete = cel1;
+        insererFin(lis1, liv1);
         return;
     }
 
 
-    Cellule* ptr = lis1->tete;
+    Cellule* ptr = lis1->tete; //  ptr is the cell with the given id
 
     while (ptr->info.id != id1)
     {
         ptr = ptr->suiv;
-        if(ptr == NULL)
+        if(ptr == NULL) // if you reach the end without finding the id
         {
-            printf("the book of id %d was not found!", id1);
-            return;/////////////I'm here
+            printf("the book of id: %d was not found!", id1);
+            return; 
         }
     }
 
+    if (ptr->suiv == NULL) // if ptr is the last cell
+    {
+        insererFin(lis1, liv1);
+        return;
+    }
+
+    cel1->suiv = ptr->suiv;
     cel1->prec = ptr;
-    cel1->suiv = ptr->suiv->suiv;
 
 
-
+    ptr->suiv->prec = cel1;
+    ptr->suiv = cel1;
 }
-
 
 int main(void)
 {

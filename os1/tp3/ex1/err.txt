@@ -1,0 +1,1 @@
+find: ‘./gi-di-3’: Permission denied

@@ -2,13 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-
-
 typedef struct
 {
-    int num_inscription;
     char nom[100];
     char prenom[100];
+    int num_inscription;
     float moyenne_generale;
 } etudiant;
 
@@ -28,130 +26,204 @@ typedef struct
 } arbre;
 
 
-node* creer_node(int num_inscription1, char* nom1, char* prenom1, float moyenne_generale1)
+node* creer_node(char* nom1, char* prenom1, int num_inscription1, float moyenne_generale1)
 {
     node* nouv = malloc(sizeof(node));
-    if (nouv == 0) exit(EXIT_FAILURE);
-
-    
+    if (nouv == NULL) exit(EXIT_FAILURE);
 
     nouv->info.num_inscription = num_inscription1;
     nouv->info.moyenne_generale = moyenne_generale1;
     strcpy(nouv->info.nom, nom1);
     strcpy(nouv->info.prenom, prenom1);
 
+    nouv->fils_g = NULL;
+    nouv->fils_d = NULL;
+
     return nouv;
 }
 
 
-
-void inserer(node** racp, node* nouv) 
+void inserer(node** rac1, node* nouv)
 {
-    if (*racp == NULL)
+    if (*rac1 == NULL)
     {
-        *racp = nouv;
+        *rac1 = nouv;
     }
-    else if (nouv->info.num_inscription > (*racp)->info.num_inscription)
+    else if (nouv->info.num_inscription > (*rac1)->info.num_inscription)
     {
-        inserer(&(*racp)->fils_d, nouv);
+        inserer(&(*rac1)->fils_d, nouv);
     }
-    else if (nouv->info.num_inscription < (*racp)->info.num_inscription)
+    else if (nouv->info.num_inscription < (*rac1)->info.num_inscription)
     {
-        inserer(&(*racp)->fils_g, nouv);
+        inserer(&(*rac1)->fils_g, nouv);
     }
     else
     {
-        printf("this student is already in the tree!\n");
-        return;
+        printf("Error, the student already exists!");
     }
 }
 
 
-void prefixe(node* rac1)
+// print the root then show the left subtree then show the right subtree
+void prefixe(node* ptr) // used to cpy
 {
-    if (rac1 == NULL)
-    {
-        return;
-    }
-    else
-    {
-        printf("%d: %s %s : %f\n",rac1->info.num_inscription, rac1->info.prenom, rac1->info.nom, rac1->info.moyenne_generale);
-    }
+    if (ptr == NULL) return;
 
-    prefixe(rac1->fils_g);
-    prefixe(rac1->fils_d);
+    printf("%d--> ", ptr->info.num_inscription);
+    prefixe(ptr->fils_g);
+    prefixe(ptr->fils_d);
 }
 
 
-void infixe(node* rac1)
+// show the left subtree untill you're done then print the root then show the right subtree
+void infixe(node* ptr) // used to show in order
 {
-    if (rac1 == NULL)
+    if (ptr == NULL)
     {
         return;
     }
-    
-    infixe(rac1->fils_g);
-    printf("%d: %s %s : %f\n",rac1->info.num_inscription, rac1->info.prenom, rac1->info.nom, rac1->info.moyenne_generale);
-    infixe(rac1->fils_d);
 
-}
-
-void postfixe(node* rac1)
-{
-    if (rac1 == NULL)
-    {
-        return;
-    }
-    
-    postfixe(rac1->fils_g);
-    postfixe(rac1->fils_d);
-    printf("%d: %s %s : %f\n",rac1->info.num_inscription, rac1->info.prenom, rac1->info.nom, rac1->info.moyenne_generale);
-    
-
+    infixe(ptr->fils_g);
+    printf("%d--> ", ptr->info.num_inscription); 
+    infixe(ptr->fils_d);
 }
 
 
-node* rechercher(int id, node* rac1)
+// show the left subtree then the right subtree then print the root
+void postefixe(node* ptr) // used to delete
 {
-    if (rac1 == NULL)
+    if (ptr == NULL) return;
+
+    postefixe(ptr->fils_g);
+    postefixe(ptr->fils_d);
+    printf("%d--> ", ptr->info.num_inscription);
+}
+
+
+node* rechercher(node* race1, int num1)
+{
+    if (race1 == NULL)
     {
-        printf("not found\n");
         return NULL;
     }
-
-    if (rac1->info.num_inscription == id)
+    
+    if (num1 == race1->info.num_inscription)
     {
-        return rac1;
+        return race1;
     }
-    else if (id > rac1->info.num_inscription)
+    else if (num1 > race1->info.num_inscription)
     {
-        return rechercher(id, rac1->fils_d);
+        return rechercher(race1->fils_d, num1);
+    }
+    else // if (race1->info.num_inscription < num1)
+    {
+        return rechercher(race1->fils_g, num1);
+    }
+}
+    
+
+void afficher_etudiant(node* etud1)
+{
+    printf("ID: %d, nom: %s, prenom: %s, note: %.2f\n", etud1->info.num_inscription, etud1->info.nom, etud1->info.prenom, etud1->info.moyenne_generale);
+}
+
+
+int hauteur(node* race1)
+{
+    if (race1 == NULL)
+    {
+        return 0;
+    }
+
+    int a = hauteur(race1->fils_g);
+    int b = hauteur(race1->fils_d);
+
+    if (a >= b) 
+    {
+        return a + 1;
+        
     }
     else
     {
-        return rechercher(id, rac1->fils_g);
+        return b + 1;
     }
 }
+
+int nombre_node(node* race1)
+{
+    if (race1 == NULL)
+    {
+        return 0;
+    }
+
+    return 1 + nombre_node(race1->fils_g) + nombre_node(race1->fils_d);
+}
+
+
+int nombre_feu(node* race1)
+{
+    if (race1 == NULL)
+    {
+        return 0;
+    }
+    else if (race1->fils_g == NULL && race1->fils_d == NULL)
+    {
+        return 1;
+    }
+
+    return nombre_feu(race1->fils_g) + nombre_feu(race1->fils_d);
+}
+
+
+int nombre_inter(node* race1)
+{
+    if (race1 == NULL || (race1->fils_g == NULL && race1->fils_d == NULL))
+    {
+        return 0;
+    }
+     return 1 + nombre_inter(race1->fils_g) + nombre_inter(race1->fils_d);
+}
+
+
+ // I stopped at exercise 6 ,,,,, look for lafr9 bin binary tree and binary search tree
+
 
 int main(void)
 {
     arbre* arb1 = malloc(sizeof(arbre));
     if (arb1 == NULL) exit(EXIT_FAILURE);
-
+    
     arb1->racine = NULL;
 
-    inserer(&arb1->racine, creer_node(50, "Amrani", "Salma", 15.5));
-    inserer(&arb1->racine, creer_node(30, "Bennis", "Youssef", 13.5));
-    inserer(&arb1->racine, creer_node(70, "Idrissi", "Sara", 17));
-    inserer(&arb1->racine, creer_node(20, "Alaoui", "Adam", 12));
-    inserer(&arb1->racine, creer_node(40, "Mansouri", "Lina", 16));
-    inserer(&arb1->racine, creer_node(60, "Karim", "Omar", 14.5));
-    inserer(&arb1->racine, creer_node(80, "Tazi", "Aya", 18));
-    
-    postfixe(arb1->racine);
+    inserer(&arb1->racine, creer_node("Amrani",   "Salma",   50, 15.5));
+    inserer(&arb1->racine, creer_node("Bennis",   "Youssef", 30, 13.5));
+    inserer(&arb1->racine, creer_node("Idrissi",  "Sara",    70, 17));
+    inserer(&arb1->racine, creer_node("Alaoui",   "Adam",    20, 12));
+    inserer(&arb1->racine, creer_node("Mansouri", "Lina",    40, 16));
+    inserer(&arb1->racine, creer_node("Karim",    "Omar",    60, 14.5));
+    inserer(&arb1->racine, creer_node("Tazi",     "Aya",     80, 18));
 
-    node* tmp = rechercher(30, arb1->racine);
+    prefixe(arb1->racine);
+    printf("NULL\n");
 
-    printf("%s\n", tmp->info.nom);
+    infixe(arb1->racine);
+    printf("NULL\n");
+
+    postefixe(arb1->racine);
+    printf("NULL\n");
+
+    afficher_etudiant(rechercher(arb1->racine, 30));
+
+    printf("the height of the tree is %d\n", hauteur(arb1->racine));
+
+    printf("the number of students is %d\n", nombre_node(arb1->racine));
+
+    printf("the number of leaves is %d\n", nombre_feu(arb1->racine));
+
+    printf("the number of leaves with at least one child %d\n", nombre_inter(arb1->racine));
+
+    supprimer(rechercher(arb1->racine, 30));
+
+    infixe(arb1->racine);
+    printf("NULL\n");
 }
-
